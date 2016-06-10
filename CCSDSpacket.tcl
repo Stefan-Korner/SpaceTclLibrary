@@ -111,7 +111,7 @@ proc CCSDSpacket::getAPID {hexPacket} {
 
 # extracts the SSC from a CCSDS packet
 proc CCSDSpacket::getSSC {hexPacket} {
-  return [getUInt16 $hexPacket 2 0xC000]
+  return [getUInt16 $hexPacket 2 0x3FFF]
 }
 
 # extracts the packet length from a CCSDS packet
@@ -140,7 +140,7 @@ proc CCSDSpacket::setAPID {hexPacket apid} {
 
 # sets the SSC in a CCSDS packet
 proc CCSDSpacket::setSSC {hexPacket ssc} {
-  return [setUInt16 $hexPacket 2 $ssc 0xC000]
+  return [setUInt16 $hexPacket 2 $ssc 0x3FFF]
 }
 
 # sets the packet length field in a CCSDS packet
@@ -176,6 +176,14 @@ proc CCSDSpacket::getNextSSC {apid} {
     set CCSDSpacket::sequenceCounters($apid) 0
   }
   return $CCSDSpacket::sequenceCounters($apid)
+}
+
+# resets the SSC for a defined APID
+proc CCSDSpacket::resetSSC {apid} {
+  global CCSDSpacket::sequenceCounters
+  if {[info exists CCSDSpacket::sequenceCounters($apid)]} {
+    unset CCSDSpacket::sequenceCounters($apid)
+  }
 }
 
 ###################
