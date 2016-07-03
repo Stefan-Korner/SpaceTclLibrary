@@ -16,7 +16,8 @@ exec tclsh "$0" ${1+"$@"}
 #******************************************************************************
 # unit tests for CCSDS and PUS Packet processing                              *
 #******************************************************************************
-source CCSDSpacket.tcl
+lappend auto_path $env(PWD)   # load procedures defined in tclIndex
+namespace eval CCSDSpacket {}
 
 ###########
 # tests A #
