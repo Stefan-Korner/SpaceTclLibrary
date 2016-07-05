@@ -13,8 +13,8 @@
 #******************************************************************************
 # CCSDS and PUS binary packet processing                                      *
 #******************************************************************************
-namespace eval CCSDSpacket {}
 namespace eval CCSDSbinPacket {}
+namespace eval CCSDSpacket {}
 
 ###################
 # generic getters #
@@ -209,7 +209,7 @@ proc CCSDSbinPacket::calcCRC {binPacket} {
     0x7c26 0x6c07 0x5c64 0x4c45 0x3ca2 0x2c83 0x1ce0 0x0cc1
     0xef1f 0xff3e 0xcf5d 0xdf7c 0xaf9b 0xbfba 0x8fd9 0x9ff8
     0x6e17 0x7e36 0x4e55 0x5e74 0x2e93 0x3eb2 0x0ed1 0x1ef0
-  } 
+  }
   set crc 0xFFFF
   binary scan $binPacket c* data
   foreach {datum} $data {

@@ -45,6 +45,7 @@ set auto_index(::CCSDShexPacket::setPacketLength) [list source [file join $dir C
 set auto_index(::CCSDShexPacket::setCRC) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDShexPacket::setPusType) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDShexPacket::setPusSubType) [list source [file join $dir CCSDShexPacket.tcl]]
+set auto_index(::CCSDShexPacket::calcCRC) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDShexPacket::createTmPkt) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDShexPacket::update) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDSpacket::getNextSSC) [list source [file join $dir CCSDSpacket.tcl]]
