@@ -27,7 +27,7 @@ namespace eval CCSDSpacket {}
 set apid 1234
 set pusType 3
 set pusSubType 25
-set hexData "FFFF"
+set hexData "ffff"
 CCSDSpacket::resetSSC $apid
 puts [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
 puts [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
@@ -40,10 +40,10 @@ puts [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
 ###########
 
 set apid 1234
-set hexTmPack_0 "0CD2C000001A100319000000000000000000000000000000000000000000000000"
+set hexTmPack_0 "0cd2c000001a100319000000000000000000000000000000000000000000000000"
 CCSDSpacket::resetSSC $apid
 set hexTmPack_1 [CCSDShexPacket::update $hexTmPack_0 true]
-set hexTmPack_2 "0800C0000000100000000000000000000000000000000000000000000000000000"
+set hexTmPack_2 "0800c0000000100000000000000000000000000000000000000000000000000000"
 set ssc 0
 set packetLength 26
 set pusType 3

@@ -21,7 +21,7 @@ namespace eval CCSDSpacket {}
 ###################
 
 # note: pktBytePos is the byte position of the value in the *binary* packet
-proc CCSDShexPacket::getUInt8 {hexPacket pktBytePos {mask 0xFF}} {
+proc CCSDShexPacket::getUInt8 {hexPacket pktBytePos {mask 0xff}} {
   set hexStartBytePos [expr $pktBytePos * 2]
   set hexEndBytePos [expr ($pktBytePos * 2) + 1]
   set hexValue [string range $hexPacket $hexStartBytePos $hexEndBytePos]
@@ -29,7 +29,7 @@ proc CCSDShexPacket::getUInt8 {hexPacket pktBytePos {mask 0xFF}} {
   return [expr $value & $mask]
 }
 
-proc CCSDShexPacket::getUInt16 {hexPacket pktBytePos {mask 0xFFFF}} {
+proc CCSDShexPacket::getUInt16 {hexPacket pktBytePos {mask 0xffff}} {
   set hexStartBytePos [expr $pktBytePos * 2]
   set hexEndBytePos [expr ($pktBytePos * 2) + 3]
   set hexValue [string range $hexPacket $hexStartBytePos $hexEndBytePos]
@@ -37,7 +37,7 @@ proc CCSDShexPacket::getUInt16 {hexPacket pktBytePos {mask 0xFFFF}} {
   return [expr $value & $mask]
 }
 
-proc CCSDShexPacket::getUInt32 {hexPacket pktBytePos {mask 0xFFFFFFFF}} {
+proc CCSDShexPacket::getUInt32 {hexPacket pktBytePos {mask 0xffffffff}} {
   set hexStartBytePos [expr $pktBytePos * 2]
   set hexEndBytePos [expr ($pktBytePos * 2) + 7]
   set hexValue [string range $hexPacket $hexStartBytePos $hexEndBytePos]
@@ -50,54 +50,54 @@ proc CCSDShexPacket::getUInt32 {hexPacket pktBytePos {mask 0xFFFFFFFF}} {
 ###################
 
 # note: pktBytePos is the byte position of the value in the *binary* packet
-proc CCSDShexPacket::setUInt8 {hexPacket pktBytePos value {mask 0xFF}} {
+proc CCSDShexPacket::setUInt8 {hexPacket pktBytePos value {mask 0xff}} {
   set hexStartBytePos [expr $pktBytePos * 2]
   set hexEndBytePos [expr ($pktBytePos * 2) + 1]
-  if {$mask != 0xFF} {
+  if {$mask != 0xff} {
     # read
     set hexPacketValue [string range $hexPacket $hexStartBytePos $hexEndBytePos]
     # modify
     scan $hexPacketValue %x packetValue
-    set inverseMask [expr $mask ^ 0xFF]
+    set inverseMask [expr $mask ^ 0xff]
     set packetValue [expr $packetValue & $inverseMask]
     set value [expr $value | $packetValue]
   }
   # write
-  set hexValue [format %02X $value]
+  set hexValue [format %02x $value]
   return [string replace $hexPacket $hexStartBytePos $hexEndBytePos $hexValue]
 }
 
-proc CCSDShexPacket::setUInt16 {hexPacket pktBytePos value {mask 0xFFFF}} {
+proc CCSDShexPacket::setUInt16 {hexPacket pktBytePos value {mask 0xffff}} {
   set hexStartBytePos [expr $pktBytePos * 2]
   set hexEndBytePos [expr ($pktBytePos * 2) + 3]
-  if {$mask != 0xFFFF} {
+  if {$mask != 0xffff} {
     # read
     set hexPacketValue [string range $hexPacket $hexStartBytePos $hexEndBytePos]
     # modify
     scan $hexPacketValue %x packetValue
-    set inverseMask [expr $mask ^ 0xFFFF]
+    set inverseMask [expr $mask ^ 0xffff]
     set packetValue [expr $packetValue & $inverseMask]
     set value [expr $value | $packetValue]
   }
   # write
-  set hexValue [format %04X $value]
+  set hexValue [format %04x $value]
   return [string replace $hexPacket $hexStartBytePos $hexEndBytePos $hexValue]
 }
 
-proc CCSDShexPacket::setUInt32 {hexPacket pktBytePos value {mask 0xFFFFFFFF}} {
+proc CCSDShexPacket::setUInt32 {hexPacket pktBytePos value {mask 0xffffffff}} {
   set hexStartBytePos [expr $pktBytePos * 2]
   set hexEndBytePos [expr ($pktBytePos * 2) + 7]
-  if {$mask != 0xFFFFFFFF} {
+  if {$mask != 0xffffffff} {
     # read
     set hexPacketValue [string range $hexPacket $hexStartBytePos $hexEndBytePos]
     # modify
     scan $hexPacketValue %x packetValue
-    set inverseMask [expr $mask ^ 0xFFFFFFFF]
+    set inverseMask [expr $mask ^ 0xffffffff]
     set packetValue [expr $packetValue & $inverseMask]
     set value [expr $value | $packetValue]
   }
   # write
-  set hexValue [format %08X $value]
+  set hexValue [format %08x $value]
   return [string replace $hexPacket $hexStartBytePos $hexEndBytePos $hexValue]
 }
 
@@ -107,12 +107,12 @@ proc CCSDShexPacket::setUInt32 {hexPacket pktBytePos value {mask 0xFFFFFFFF}} {
 
 # extracts the APID from a CCSDS packet
 proc CCSDShexPacket::getAPID {hexPacket} {
-  return [CCSDShexPacket::getUInt16 $hexPacket 0 0x07FF]
+  return [CCSDShexPacket::getUInt16 $hexPacket 0 0x07ff]
 }
 
 # extracts the SSC from a CCSDS packet
 proc CCSDShexPacket::getSSC {hexPacket} {
-  return [CCSDShexPacket::getUInt16 $hexPacket 2 0x3FFF]
+  return [CCSDShexPacket::getUInt16 $hexPacket 2 0x3fff]
 }
 
 # extracts the packet length from a CCSDS packet
@@ -214,20 +214,22 @@ proc CCSDShexPacket::calcCRC {hexPacket} {
     0x6e17 0x7e36 0x4e55 0x5e74 0x2e93 0x3eb2 0x0ed1 0x1ef0
   }
   array set hexHighMap {
-    48 0x00 49 0x10 50 0x20 51 0x30 52 0x40 53 0x50 54 0x60 55 0x70
-    56 0x80 57 0x90 65 0xA0 66 0xB0 67 0xC0 68 0xD0 69 0xE0 70 0xF0
+    48 0x00 49 0x10 50 0x20 51 0x30 52 0x40  53 0x50  54 0x60  55 0x70
+    56 0x80 57 0x90 65 0xa0 66 0xb0 67 0xc0  68 0xd0  69 0xe0  70 0xf0
+                    97 0xa0 98 0xb0 99 0xc0 100 0xd0 101 0xe0 102 0xf0
   }
   array set hexLowMap {
-    48 0x00 49 0x01 50 0x02 51 0x03 52 0x04 53 0x05 54 0x06 55 0x07
-    56 0x08 57 0x09 65 0x0A 66 0x0B 67 0x0C 68 0x0D 69 0x0E 70 0x0F
+    48 0x00 49 0x01 50 0x02 51 0x03 52 0x04  53 0x05  54 0x06  55 0x07
+    56 0x08 57 0x09 65 0x0a 66 0x0b 67 0x0c  68 0x0d  69 0x0e  70 0x0f
+                    97 0x0a 98 0x0b 99 0x0c 100 0x0d 101 0x0e 102 0x0f
   }
-  set crc 0xFFFF
+  set crc 0xffff
   binary scan $hexPacket c* data
   foreach {hexHigh hexLow} $data {
     set highByte $hexHighMap($hexHigh)
     set lowByte $hexLowMap($hexLow)
     set datum [expr $highByte + $lowByte]
-    set crc [expr {[lindex $table [expr {(($crc >> 8) ^ $datum) & 0xFF}]] ^ ($crc << 8) & 0xFFFF}]
+    set crc [expr {[lindex $table [expr {(($crc >> 8) ^ $datum) & 0xff}]] ^ ($crc << 8) & 0xffff}]
   }
   return $crc
 }
@@ -246,11 +248,11 @@ proc CCSDShexPacket::createTmPkt {apid pusType pusSubType hexData \
 {
   # APID
   set hdr0001 [expr $apid | 0x0800]
-  set hdrx0001 [format %04X $hdr0001]
+  set hdrx0001 [format %04x $hdr0001]
   # SSC
   set ssc [CCSDSpacket::getNextSSC $apid]
-  set hdr0203 [expr $ssc | 0xC000]
-  set hdrx0203 [format %04X $hdr0203]
+  set hdr0203 [expr $ssc | 0xc000]
+  set hdrx0203 [format %04x $hdr0203]
   # packet length
   set allHeadersLength [expr 6 + $pusHeaderByteSize]
   set hexDataLength [string length $hexData]
@@ -261,16 +263,16 @@ proc CCSDShexPacket::createTmPkt {apid pusType pusSubType hexData \
   }
   set packetLengthValue [expr $packetLength - 7]
   set hdr0405 $packetLengthValue
-  set hdrx0405 [format %04X $hdr0405]
+  set hdrx0405 [format %04x $hdr0405]
   # PUS version
   set hdr06 0x10
-  set hdrx06 [format %02X $hdr06]
+  set hdrx06 [format %02x $hdr06]
   # PUS type
   set hdr07 $pusType
-  set hdrx07 [format %02X $hdr07]
+  set hdrx07 [format %02x $hdr07]
   # PUS sub-type
   set hdr08 $pusSubType
-  set hdrx08 [format %02X $hdr08]
+  set hdrx08 [format %02x $hdr08]
   # filler 1 and time stamp
   set fillerStartBytePos 9
   if {$calcTime} {
@@ -297,7 +299,7 @@ proc CCSDShexPacket::createTmPkt {apid pusType pusSubType hexData \
   # CRC
   if {$appendCrc} {
     set crc [CCSDShexPacket::calcCRC $hexPacket]
-    set hexCRC [format %04X $crc]
+    set hexCRC [format %04x $crc]
     set hexPacket ${hexPacket}${hexCRC}
   }
   return $hexPacket

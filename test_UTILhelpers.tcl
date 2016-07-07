@@ -1,3 +1,6 @@
+#!/bin/sh
+# \
+exec tclsh "$0" ${1+"$@"}
 #******************************************************************************
 # (C) 2016, Stefan Korner, Austria                                            *
 #                                                                             *
@@ -11,17 +14,13 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser     *
 # General Public License for more details.                                    *
 #******************************************************************************
-# helpers for unit tests                                                      *
+# unit test for helpers                                                       *
 #******************************************************************************
+lappend auto_path $env(PWD)   # load procedures defined in tclIndex
 
-# converts binary data to hex data
-proc bin2hex {binData} {
-  set hexData ""
-  set binLen [string length $binData]
-  for {set i 0} {$i < $binLen} {incr i} {
-    set binByte [string index $binData $i]
-    set hexByte [format %02X [scan $binByte %c]]
-    append hexData $hexByte 
-  }
-  return $hexData
-}
+set binData1 "a0123456789abcmnoABCMNO"
+puts "binData1 = $binData1"
+set hexData1 [bin2hex $binData1]
+puts "hexData1 = $hexData1"
+set binData2 [hex2bin $hexData1]
+puts "binData2 = $binData2"

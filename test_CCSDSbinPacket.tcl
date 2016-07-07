@@ -27,7 +27,7 @@ namespace eval CCSDSpacket {}
 set apid 1234
 set pusType 3
 set pusSubType 25
-set binData [binary format H* "FFFF"]
+set binData [hex2bin "ffff"]
 CCSDSpacket::resetSSC $apid
 puts [bin2hex [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]]
 puts [bin2hex [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]]
@@ -40,10 +40,10 @@ puts [bin2hex [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]]
 ###########
 
 set apid 1234
-set binTmPack_0 [binary format H* "0CD2C000001A100319000000000000000000000000000000000000000000000000"]
+set binTmPack_0 [hex2bin "0cd2c000001a100319000000000000000000000000000000000000000000000000"]
 CCSDSpacket::resetSSC $apid
 set binTmPack_1 [CCSDSbinPacket::update $binTmPack_0 true]
-set binTmPack_2 [binary format H* "0800C0000000100000000000000000000000000000000000000000000000000000"]
+set binTmPack_2 [hex2bin "0800c0000000100000000000000000000000000000000000000000000000000000"]
 set ssc 0
 set packetLength 26
 set pusType 3
@@ -56,10 +56,10 @@ set binTmPack_2 [CCSDSbinPacket::setPusType $binTmPack_2 $pusType]
 set binTmPack_2 [CCSDSbinPacket::setPusSubType $binTmPack_2 $pusSubType]
 set binTmPack_2 [CCSDSbinPacket::setCRC $binTmPack_2 $crc]
 CCSDSpacket::resetSSC $apid
-set packetData [binary format H* "000000000000000000000000000000"]
+set packetData [hex2bin "000000000000000000000000000000"]
 set binTmPack_3 [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $packetData false false]
 CCSDSpacket::resetSSC $apid
-set packetData [binary format H* "00000000000000000000000000"]
+set packetData [hex2bin "00000000000000000000000000"]
 set binTmPack_4 [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $packetData]
 puts "binTmPack_0 = [bin2hex $binTmPack_0]"
 puts "binTmPack_1 = [bin2hex $binTmPack_1]"
