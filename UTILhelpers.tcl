@@ -56,3 +56,26 @@ proc hex2lst {hexData} {
   }
   return $lstData
 }
+
+# converts binary data to list data
+proc bin2lst {binData} {
+  set lstData {}
+  set binDataLength [string length $binData]
+  for {set i 0} {$i < $binDataLength} {incr i} {
+    set datum [scan [string range $binData $i $i] %c]
+    lappend lstData $datum
+  }
+  return $lstData
+}
+
+# converts list data to binary data
+proc lst2bin {lstData} {
+  set binData ""
+  foreach {datum} $lstData {
+    set binDatum [format %c $datum]
+    append binData $binDatum
+  }
+  return $binData
+}
+
+

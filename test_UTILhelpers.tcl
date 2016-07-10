@@ -24,3 +24,11 @@ set hexData1 [bin2hex $binData1]
 puts "hexData1 = $hexData1"
 set binData2 [hex2bin $hexData1]
 puts "binData2 = $binData2"
+set lstData1 [bin2lst $binData1]
+puts "lstData1 = $lstData1"
+set binData3 [lst2bin $lstData1]
+puts "binData3 = $binData3"
+set lstData2 [hex2lst $hexData1]
+puts "lstData2 = $lstData2"
+set hexData2 [lst2hex $lstData2]
+puts "hexData2 = $hexData2"
