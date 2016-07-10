@@ -272,13 +272,21 @@ proc CCSDSlstPacket::createTmPkt {apid pusType pusSubType lstData \
   if {$calcTime} {
     # filler 1
     set fillerLength [expr $timeByteOffset - $fillerStartBytePos]
-    set hdrFill1 [lrepeat $fillerLength 0]
+    if {$fillerLength >= 1} {
+      set hdrFill1 [lrepeat $fillerLength 0]
+    } else {
+      set hdrFill1 {}
+    }
     incr fillerStartBytePos $fillerLength
     # coarse time
     set hdrCoarse {0 0 0 0}
     incr fillerStartBytePos 4
     # fine time
-    set hdrFine [lrepeat $fineTimeByteSize 0]
+    if {$fineTimeByteSize >= 1} {
+      set hdrFine [lrepeat $fineTimeByteSize 0]
+    } else {
+      set hdrFine {}
+    }
     incr fillerStartBytePos $fineTimeByteSize
   } else {
     set hdrFill1 {}
@@ -287,10 +295,15 @@ proc CCSDSlstPacket::createTmPkt {apid pusType pusSubType lstData \
   }
   # filler 2
   set fillerLength [expr $allHeadersLength - $fillerStartBytePos]
-  set hdrFill2 [lrepeat $fillerLength 0]
+  if {$fillerLength >= 1} {
+    set hdrFill2 [lrepeat $fillerLength 0]
+  } else {
+    set hdrFill2 {}
+  }
   # packet without CRC
-  set hdr00_08 {$hdr00 $hdr01 $hdr02 $hdr03 $hdr04 $hdr05 $hdr06 $hdr07 $hdr08}
-  set lstPacket [concat $hdr00_08 $hdrFill1 $hdrCoarse $hdrFine $hdrFill2 $binData]
+  set hdr00_08 {}
+  lappend hdr00_08 $hdr00 $hdr01 $hdr02 $hdr03 $hdr04 $hdr05 $hdr06 $hdr07 $hdr08
+  set lstPacket [concat $hdr00_08 $hdrFill1 $hdrCoarse $hdrFine $hdrFill2 $lstData]
   # CRC
   if {$appendCrc} {
     set crc [CCSDSlstPacket::calcCRC $lstPacket]
