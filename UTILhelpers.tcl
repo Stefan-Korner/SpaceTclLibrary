@@ -77,5 +77,3 @@ proc lst2bin {lstData} {
   }
   return $binData
 }
-
-
