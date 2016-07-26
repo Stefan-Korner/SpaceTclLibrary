@@ -16,6 +16,50 @@
 namespace eval CCSDSlstPacket {}
 namespace eval CCSDSpacket {}
 
+###########
+# helpers #
+###########
+
+# length in byte representation
+proc CCSDSlstPacket::byteLength {lstPacket} {
+  return [llength $lstPacket]
+}
+
+# good readable string representation
+# optional parameter endBytePos points after the last byte
+proc CCSDSlstPacket::dumpStr {lstPacket {endBytePos -1}} {
+  if {$endBytePos == -1} {
+    set endBytePos [CCSDSlstPacket::byteLength $lstPacket]
+  }
+  if {$endBytePos == 0} {
+    return "empty"
+  }
+  set retString ""
+  for {set i 0} {$i < $endBytePos} {} {
+    set asciiPostfix " "
+    # append line break and line number
+    append retString "\n"
+    append retString [format %04x $i]
+    for {set j 0} {($i < $endBytePos) && ($j < 16)} {incr j} {
+      set value [lindex $lstPacket $i]
+      set hexValue [format "%02x" $value]
+      append retString " $hexValue"
+      if {(0x20 <= $value) && ($value < 0x7F)} {
+        append asciiPostfix [binary format c $value]
+      } else {
+        append asciiPostfix "."
+      }
+      incr i
+    }
+    # fill up gap
+    set missingBytes [expr 16 - $j]
+    append retString [string repeat "   " $missingBytes]
+    # append ASCII info
+    append retString "$asciiPostfix"
+  }
+  return $retString
+}
+
 ###################
 # generic getters #
 ###################
@@ -262,7 +306,7 @@ proc CCSDSlstPacket::createTmPkt {apid pusType pusSubType lstData \
   set hdr04 [expr ($hdr0405 & 0xFF00) / 0x100]
   set hdr05 [expr  $hdr0405 & 0xFF]
   # PUS version
-  set hdr06 0x10
+  set hdr06 16
   # PUS type
   set hdr07 $pusType
   # PUS sub-type

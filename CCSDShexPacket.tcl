@@ -16,6 +16,56 @@
 namespace eval CCSDShexPacket {}
 namespace eval CCSDSpacket {}
 
+###########
+# helpers #
+###########
+
+# length in byte representation
+proc CCSDShexPacket::byteLength {hexPacket} {
+  set hexByteLength [string length $hexPacket]
+  return [expr $hexByteLength / 2]
+}
+
+# good readable string representation
+# optional parameter endBytePos points after the last byte
+proc CCSDShexPacket::dumpStr {hexPacket {endBytePos -1}} {
+  if {$endBytePos == -1} {
+    set endBytePos [CCSDShexPacket::byteLength $hexPacket]
+  }
+  if {$endBytePos == 0} {
+    return "empty"
+  }
+  set retString ""
+  set ix 0
+  for {set i 0} {$i < $endBytePos} {} {
+    set asciiPostfix " "
+    # append line break and line number
+    append retString "\n"
+    append retString [format %04x $i]
+    for {set j 0} {($i < $endBytePos) && ($j < 16)} {incr j} {
+      set hexStartPos $ix
+      incr ix
+      set hexStopPos $ix
+      incr ix
+      set hexValue [string range $hexPacket $hexStartPos $hexStopPos]
+      scan $hexValue %x value
+      append retString " $hexValue"
+      if {(0x20 <= $value) && ($value < 0x7F)} {
+        append asciiPostfix [binary format c $value]
+      } else {
+        append asciiPostfix "."
+      }
+      incr i
+    }
+    # fill up gap
+    set missingBytes [expr 16 - $j]
+    append retString [string repeat "   " $missingBytes]
+    # append ASCII info
+    append retString "$asciiPostfix"
+  }
+  return $retString
+}
+
 ###################
 # generic getters #
 ###################
@@ -255,8 +305,7 @@ proc CCSDShexPacket::createTmPkt {apid pusType pusSubType hexData \
   set hdrx0203 [format %04x $hdr0203]
   # packet length
   set allHeadersLength [expr 6 + $pusHeaderByteSize]
-  set hexDataLength [string length $hexData]
-  set dataLength [expr $hexDataLength / 2]
+  set dataLength [CCSDShexPacket::byteLength $hexData]
   set packetLength [expr $allHeadersLength + $dataLength]
   if {$appendCrc} {
     incr packetLength 2

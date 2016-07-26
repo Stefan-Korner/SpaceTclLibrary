@@ -24,16 +24,21 @@ namespace eval CCSDSpacket {}
 # tests A #
 ###########
 
-#set apid 1234
-#set pusType 3
-#set pusSubType 25
-#set binData [hex2bin "ffff"]
-#CCSDSpacket::resetSSC $apid
-#puts [bin2hex [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $binData]]
-#puts [bin2hex [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $binData]]
-#puts [bin2hex [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $binData]]
-#puts [bin2hex [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $binData]]
-#puts [bin2hex [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $binData]]
+set apid 1234
+set pusType 3
+set pusSubType 25
+set lstData [hex2lst "ffff"]
+CCSDSpacket::resetSSC $apid
+set pkt1 [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $lstData]
+set pkt2 [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $lstData]
+set pkt3 [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $lstData]
+set pkt4 [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $lstData]
+set pkt5 [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $lstData]
+puts "pkt1 = [CCSDSlstPacket::dumpStr $pkt1]"
+puts "pkt2 = [CCSDSlstPacket::dumpStr $pkt2]"
+puts "pkt3 = [CCSDSlstPacket::dumpStr $pkt3]"
+puts "pkt4 = [CCSDSlstPacket::dumpStr $pkt4]"
+puts "pkt5 = [CCSDSlstPacket::dumpStr $pkt5]"
 
 ###########
 # tests B #
@@ -62,11 +67,16 @@ set lstTmPack_3 [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $packetD
 CCSDSpacket::resetSSC $apid
 set packetData [hex2lst "00000000000000000000000000"]
 set lstTmPack_4 [CCSDSlstPacket::createTmPkt $apid $pusType $pusSubType $packetData]
-puts "lstTmPack_0 = [lst2hex $lstTmPack_0]"
-puts "lstTmPack_1 = [lst2hex $lstTmPack_1]"
-puts "lstTmPack_2 = [lst2hex $lstTmPack_2]"
-puts "lstTmPack_3 = [lst2hex $lstTmPack_3]"
-puts "lstTmPack_4 = [lst2hex $lstTmPack_4]"
+puts "lstTmPack_0 = [CCSDSlstPacket::dumpStr $lstTmPack_0]"
+puts "lstTmPack_1 = [CCSDSlstPacket::dumpStr $lstTmPack_1]"
+puts "lstTmPack_2 = [CCSDSlstPacket::dumpStr $lstTmPack_2]"
+puts "lstTmPack_3 = [CCSDSlstPacket::dumpStr $lstTmPack_3]"
+puts "lstTmPack_4 = [CCSDSlstPacket::dumpStr $lstTmPack_4]"
+puts "length = [CCSDSlstPacket::byteLength $lstTmPack_0]"
+puts "length = [CCSDSlstPacket::byteLength $lstTmPack_1]"
+puts "length = [CCSDSlstPacket::byteLength $lstTmPack_2]"
+puts "length = [CCSDSlstPacket::byteLength $lstTmPack_3]"
+puts "length = [CCSDSlstPacket::byteLength $lstTmPack_4]"
 puts "apid = [CCSDSlstPacket::getAPID $lstTmPack_0]"
 puts "apid = [CCSDSlstPacket::getAPID $lstTmPack_1]"
 puts "apid = [CCSDSlstPacket::getAPID $lstTmPack_2]"

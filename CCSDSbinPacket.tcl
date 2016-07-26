@@ -16,6 +16,51 @@
 namespace eval CCSDSbinPacket {}
 namespace eval CCSDSpacket {}
 
+###########
+# helpers #
+###########
+
+# length in byte representation
+proc CCSDSbinPacket::byteLength {binPacket} {
+  return [string length $binPacket]
+}
+
+# good readable string representation
+# optional parameter endBytePos points after the last byte
+proc CCSDSbinPacket::dumpStr {binPacket {endBytePos -1}} {
+  if {$endBytePos == -1} {
+    set endBytePos [CCSDSbinPacket::byteLength $binPacket]
+  }
+  if {$endBytePos == 0} {
+    return "empty"
+  }
+  set retString ""
+  for {set i 0} {$i < $endBytePos} {} {
+    set asciiPostfix " "
+    # append line break and line number
+    append retString "\n"
+    append retString [format %04x $i]
+    for {set j 0} {($i < $endBytePos) && ($j < 16)} {incr j} {
+      set char [string range $binPacket $i $i]
+      set value [scan $char %c]
+      set hexValue [format "%02x" $value]
+      append retString " $hexValue"
+      if {(0x20 <= $value) && ($value < 0x7F)} {
+        append asciiPostfix $char
+      } else {
+        append asciiPostfix "."
+      }
+      incr i
+    }
+    # fill up gap
+    set missingBytes [expr 16 - $j]
+    append retString [string repeat "   " $missingBytes]
+    # append ASCII info
+    append retString "$asciiPostfix"
+  }
+  return $retString
+}
+
 ###################
 # generic getters #
 ###################

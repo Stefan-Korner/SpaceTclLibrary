@@ -29,11 +29,16 @@ set pusType 3
 set pusSubType 25
 set binData [hex2bin "ffff"]
 CCSDSpacket::resetSSC $apid
-puts [bin2hex [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]]
-puts [bin2hex [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]]
-puts [bin2hex [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]]
-puts [bin2hex [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]]
-puts [bin2hex [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]]
+set pkt1 [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]
+set pkt2 [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]
+set pkt3 [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]
+set pkt4 [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]
+set pkt5 [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $binData]
+puts "pkt1 = [CCSDSbinPacket::dumpStr $pkt1]"
+puts "pkt2 = [CCSDSbinPacket::dumpStr $pkt2]"
+puts "pkt3 = [CCSDSbinPacket::dumpStr $pkt3]"
+puts "pkt4 = [CCSDSbinPacket::dumpStr $pkt4]"
+puts "pkt5 = [CCSDSbinPacket::dumpStr $pkt5]"
 
 ###########
 # tests B #
@@ -61,11 +66,16 @@ set binTmPack_3 [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $packetD
 CCSDSpacket::resetSSC $apid
 set packetData [hex2bin "00000000000000000000000000"]
 set binTmPack_4 [CCSDSbinPacket::createTmPkt $apid $pusType $pusSubType $packetData]
-puts "binTmPack_0 = [bin2hex $binTmPack_0]"
-puts "binTmPack_1 = [bin2hex $binTmPack_1]"
-puts "binTmPack_2 = [bin2hex $binTmPack_2]"
-puts "binTmPack_3 = [bin2hex $binTmPack_3]"
-puts "binTmPack_4 = [bin2hex $binTmPack_4]"
+puts "binTmPack_0 = [CCSDSbinPacket::dumpStr $binTmPack_0]"
+puts "binTmPack_1 = [CCSDSbinPacket::dumpStr $binTmPack_1]"
+puts "binTmPack_2 = [CCSDSbinPacket::dumpStr $binTmPack_2]"
+puts "binTmPack_3 = [CCSDSbinPacket::dumpStr $binTmPack_3]"
+puts "binTmPack_4 = [CCSDSbinPacket::dumpStr $binTmPack_4]"
+puts "length = [CCSDSbinPacket::byteLength $binTmPack_0]"
+puts "length = [CCSDSbinPacket::byteLength $binTmPack_1]"
+puts "length = [CCSDSbinPacket::byteLength $binTmPack_2]"
+puts "length = [CCSDSbinPacket::byteLength $binTmPack_3]"
+puts "length = [CCSDSbinPacket::byteLength $binTmPack_4]"
 puts "apid = [CCSDSbinPacket::getAPID $binTmPack_0]"
 puts "apid = [CCSDSbinPacket::getAPID $binTmPack_1]"
 puts "apid = [CCSDSbinPacket::getAPID $binTmPack_2]"

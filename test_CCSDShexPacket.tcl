@@ -29,11 +29,16 @@ set pusType 3
 set pusSubType 25
 set hexData "ffff"
 CCSDSpacket::resetSSC $apid
-puts [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
-puts [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
-puts [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
-puts [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
-puts [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
+set pkt1 [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
+set pkt2 [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
+set pkt3 [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
+set pkt4 [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
+set pkt5 [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $hexData]
+puts "pkt1 = [CCSDShexPacket::dumpStr $pkt1]"
+puts "pkt2 = [CCSDShexPacket::dumpStr $pkt2]"
+puts "pkt3 = [CCSDShexPacket::dumpStr $pkt3]"
+puts "pkt4 = [CCSDShexPacket::dumpStr $pkt4]"
+puts "pkt5 = [CCSDShexPacket::dumpStr $pkt5]"
 
 ###########
 # tests B #
@@ -61,11 +66,16 @@ set hexTmPack_3 [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $packetD
 CCSDSpacket::resetSSC $apid
 set packetData "00000000000000000000000000"
 set hexTmPack_4 [CCSDShexPacket::createTmPkt $apid $pusType $pusSubType $packetData]
-puts "hexTmPack_0 = $hexTmPack_0"
-puts "hexTmPack_1 = $hexTmPack_1"
-puts "hexTmPack_2 = $hexTmPack_2"
-puts "hexTmPack_3 = $hexTmPack_3"
-puts "hexTmPack_4 = $hexTmPack_4"
+puts "hexTmPack_0 = [CCSDShexPacket::dumpStr $hexTmPack_0]"
+puts "hexTmPack_1 = [CCSDShexPacket::dumpStr $hexTmPack_1]"
+puts "hexTmPack_2 = [CCSDShexPacket::dumpStr $hexTmPack_2]"
+puts "hexTmPack_3 = [CCSDShexPacket::dumpStr $hexTmPack_3]"
+puts "hexTmPack_4 = [CCSDShexPacket::dumpStr $hexTmPack_4]"
+puts "length = [CCSDShexPacket::byteLength $hexTmPack_0]"
+puts "length = [CCSDShexPacket::byteLength $hexTmPack_1]"
+puts "length = [CCSDShexPacket::byteLength $hexTmPack_2]"
+puts "length = [CCSDShexPacket::byteLength $hexTmPack_3]"
+puts "length = [CCSDShexPacket::byteLength $hexTmPack_4]"
 puts "apid = [CCSDShexPacket::getAPID $hexTmPack_0]"
 puts "apid = [CCSDShexPacket::getAPID $hexTmPack_1]"
 puts "apid = [CCSDShexPacket::getAPID $hexTmPack_2]"
