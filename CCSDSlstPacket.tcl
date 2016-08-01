@@ -84,7 +84,7 @@ proc CCSDSlstPacket::getUInt32 {lstPacket bytePos {mask 0xFFFFFFFF}} {
   set byte2 [lindex $lstPacket $bytePos]
   incr pktBytePos
   set byte3 [lindex $lstPacket $bytePos]
-  return [expr (($byte0 * 0x100) + $byte1) * 0x100 + $byte2) * 0x100 + $byte3) & $mask]
+  return [expr (((($byte0 * 0x100) + $byte1) * 0x100 + $byte2) * 0x100 + $byte3) & $mask]
 }
 
 ###################
