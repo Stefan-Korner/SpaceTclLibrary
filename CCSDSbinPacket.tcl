@@ -83,8 +83,8 @@ proc CCSDSbinPacket::getUInt32 {binPacket bytePos {mask 0xFFFFFFFF}} {
   set byte1 [scan [string range $binPacket $bytePos $bytePos] %c]
   incr bytePos
   set byte2 [scan [string range $binPacket $bytePos $bytePos] %c]
-  incr pktBytePos
-  set byte3 [scan [string range $binPacket $pktBytePos $bytePos] %c]
+  incr bytePos
+  set byte3 [scan [string range $binPacket $bytePos $bytePos] %c]
   return [expr (((($byte0 * 0x100) + $byte1) * 0x100 + $byte2) * 0x100 + $byte3) & $mask]
 }
 
