@@ -106,3 +106,22 @@ puts "crc = [CCSDShexPacket::getCRC $hexTmPack_1]"
 puts "crc = [CCSDShexPacket::getCRC $hexTmPack_2]"
 puts "crc = [CCSDShexPacket::getCRC $hexTmPack_3]"
 puts "crc = [CCSDShexPacket::getCRC $hexTmPack_4]"
+
+###########
+# tests C #
+###########
+
+set hexPacket "30313233343536373839"
+set subHexPacket1 [CCSDShexPacket::subPacket $hexPacket 0]
+set subHexPacket2 [CCSDShexPacket::subPacket $hexPacket 5]
+set subHexPacket3 [CCSDShexPacket::subPacket $hexPacket 5 4]
+set subHexPacket4 [CCSDShexPacket::subPacket $hexPacket 5 5]
+set subHexPacket5 [CCSDShexPacket::subPacket $hexPacket 5 6]
+set subHexPacket6 [CCSDShexPacket::subPacket $hexPacket 5 7]
+puts "hexPacket = [CCSDShexPacket::dumpStr $hexPacket]"
+puts "subHexPacket1 = [CCSDShexPacket::dumpStr $subHexPacket1]"
+puts "subHexPacket2 = [CCSDShexPacket::dumpStr $subHexPacket2]"
+puts "subHexPacket3 = [CCSDShexPacket::dumpStr $subHexPacket3]"
+puts "subHexPacket4 = [CCSDShexPacket::dumpStr $subHexPacket4]"
+puts "subHexPacket5 = [CCSDShexPacket::dumpStr $subHexPacket5]"
+puts "subHexPacket6 = [CCSDShexPacket::dumpStr $subHexPacket6]"

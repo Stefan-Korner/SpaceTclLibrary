@@ -25,6 +25,18 @@ proc CCSDSlstPacket::byteLength {lstPacket} {
   return [llength $lstPacket]
 }
 
+# optional parameter endBytePos points after the last byte
+proc CCSDSlstPacket::subPacket {lstPacket startBytePos {endBytePos -1}} {
+  if {$endBytePos == -1} {
+    set endBytePos [CCSDSlstPacket::byteLength $lstPacket]
+  }
+  if {$startBytePos > $endBytePos} {
+    return [list]
+  }
+  incr endBytePos -1
+  return [lrange $lstPacket $startBytePos $endBytePos]
+}
+
 # good readable string representation
 # optional parameter endBytePos points after the last byte
 proc CCSDSlstPacket::dumpStr {lstPacket {endBytePos -1}} {

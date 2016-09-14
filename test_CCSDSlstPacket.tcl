@@ -107,3 +107,22 @@ puts "crc = [CCSDSlstPacket::getCRC $lstTmPack_1]"
 puts "crc = [CCSDSlstPacket::getCRC $lstTmPack_2]"
 puts "crc = [CCSDSlstPacket::getCRC $lstTmPack_3]"
 puts "crc = [CCSDSlstPacket::getCRC $lstTmPack_4]"
+
+###########
+# tests C #
+###########
+
+set lstPacket [hex2lst "30313233343536373839"]
+set subLstPacket1 [CCSDSlstPacket::subPacket $lstPacket 0]
+set subLstPacket2 [CCSDSlstPacket::subPacket $lstPacket 5]
+set subLstPacket3 [CCSDSlstPacket::subPacket $lstPacket 5 4]
+set subLstPacket4 [CCSDSlstPacket::subPacket $lstPacket 5 5]
+set subLstPacket5 [CCSDSlstPacket::subPacket $lstPacket 5 6]
+set subLstPacket6 [CCSDSlstPacket::subPacket $lstPacket 5 7]
+puts "lstPacket = [CCSDSlstPacket::dumpStr $lstPacket]"
+puts "subLstPacket1 = [CCSDSlstPacket::dumpStr $subLstPacket1]"
+puts "subLstPacket2 = [CCSDSlstPacket::dumpStr $subLstPacket2]"
+puts "subLstPacket3 = [CCSDSlstPacket::dumpStr $subLstPacket3]"
+puts "subLstPacket4 = [CCSDSlstPacket::dumpStr $subLstPacket4]"
+puts "subLstPacket5 = [CCSDSlstPacket::dumpStr $subLstPacket5]"
+puts "subLstPacket6 = [CCSDSlstPacket::dumpStr $subLstPacket6]"

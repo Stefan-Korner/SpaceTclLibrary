@@ -68,3 +68,15 @@ crc = 37657
 crc = 37657
 crc = 0
 crc = 37657
+hexPacket = 
+0000 30 31 32 33 34 35 36 37 38 39                   0123456789
+subHexPacket1 = 
+0000 30 31 32 33 34 35 36 37 38 39                   0123456789
+subHexPacket2 = 
+0000 35 36 37 38 39                                  56789
+subHexPacket3 = empty
+subHexPacket4 = empty
+subHexPacket5 = 
+0000 35                                              5
+subHexPacket6 = 
+0000 35 36                                           56

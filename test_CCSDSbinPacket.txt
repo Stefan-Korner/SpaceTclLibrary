@@ -68,3 +68,15 @@ crc = 37657
 crc = 37657
 crc = 0
 crc = 37657
+binPacket = 
+0000 30 31 32 33 34 35 36 37 38 39                   0123456789
+subBinPacket1 = 
+0000 30 31 32 33 34 35 36 37 38 39                   0123456789
+subBinPacket2 = 
+0000 35 36 37 38 39                                  56789
+subBinPacket3 = empty
+subBinPacket4 = empty
+subBinPacket5 = 
+0000 35                                              5
+subBinPacket6 = 
+0000 35 36                                           56

@@ -26,6 +26,20 @@ proc CCSDShexPacket::byteLength {hexPacket} {
   return [expr $hexByteLength / 2]
 }
 
+# position parameters refer to the *binary* packet
+# optional parameter endBytePos points after the last byte
+proc CCSDShexPacket::subPacket {hexPacket startBytePos {endBytePos -1}} {
+  if {$endBytePos == -1} {
+    set endBytePos [CCSDShexPacket::byteLength $hexPacket]
+  }
+  if {$startBytePos > $endBytePos} {
+    return ""
+  }
+  set hexStartPos [expr $startBytePos * 2]
+  set hexEndPos [expr ($endBytePos * 2) - 1]
+  return [string range $hexPacket $hexStartPos $hexEndPos]
+}
+
 # good readable string representation
 # optional parameter endBytePos points after the last byte
 proc CCSDShexPacket::dumpStr {hexPacket {endBytePos -1}} {

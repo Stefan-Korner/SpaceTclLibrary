@@ -25,6 +25,18 @@ proc CCSDSbinPacket::byteLength {binPacket} {
   return [string length $binPacket]
 }
 
+# optional parameter endBytePos points after the last byte
+proc CCSDSbinPacket::subPacket {binPacket startBytePos {endBytePos -1}} {
+  if {$endBytePos == -1} {
+    set endBytePos [CCSDSbinPacket::byteLength $binPacket]
+  }
+  if {$startBytePos > $endBytePos} {
+    return ""
+  }
+  incr endBytePos -1
+  return [string range $binPacket $startBytePos $endBytePos]
+}
+
 # good readable string representation
 # optional parameter endBytePos points after the last byte
 proc CCSDSbinPacket::dumpStr {binPacket {endBytePos -1}} {

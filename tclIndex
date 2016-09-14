@@ -7,6 +7,7 @@
 # a script that loads the command.
 
 set auto_index(::CCSDSbinPacket::byteLength) [list source [file join $dir CCSDSbinPacket.tcl]]
+set auto_index(::CCSDSbinPacket::subPacket) [list source [file join $dir CCSDSbinPacket.tcl]]
 set auto_index(::CCSDSbinPacket::dumpStr) [list source [file join $dir CCSDSbinPacket.tcl]]
 set auto_index(::CCSDSbinPacket::getUInt8) [list source [file join $dir CCSDSbinPacket.tcl]]
 set auto_index(::CCSDSbinPacket::getUInt16) [list source [file join $dir CCSDSbinPacket.tcl]]
@@ -30,6 +31,7 @@ set auto_index(::CCSDSbinPacket::calcCRC) [list source [file join $dir CCSDSbinP
 set auto_index(::CCSDSbinPacket::createTmPkt) [list source [file join $dir CCSDSbinPacket.tcl]]
 set auto_index(::CCSDSbinPacket::update) [list source [file join $dir CCSDSbinPacket.tcl]]
 set auto_index(::CCSDShexPacket::byteLength) [list source [file join $dir CCSDShexPacket.tcl]]
+set auto_index(::CCSDShexPacket::subPacket) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDShexPacket::dumpStr) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDShexPacket::getUInt8) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDShexPacket::getUInt16) [list source [file join $dir CCSDShexPacket.tcl]]
@@ -53,6 +55,7 @@ set auto_index(::CCSDShexPacket::calcCRC) [list source [file join $dir CCSDShexP
 set auto_index(::CCSDShexPacket::createTmPkt) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDShexPacket::update) [list source [file join $dir CCSDShexPacket.tcl]]
 set auto_index(::CCSDSlstPacket::byteLength) [list source [file join $dir CCSDSlstPacket.tcl]]
+set auto_index(::CCSDSlstPacket::subPacket) [list source [file join $dir CCSDSlstPacket.tcl]]
 set auto_index(::CCSDSlstPacket::dumpStr) [list source [file join $dir CCSDSlstPacket.tcl]]
 set auto_index(::CCSDSlstPacket::getUInt8) [list source [file join $dir CCSDSlstPacket.tcl]]
 set auto_index(::CCSDSlstPacket::getUInt16) [list source [file join $dir CCSDSlstPacket.tcl]]

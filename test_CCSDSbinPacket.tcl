@@ -106,3 +106,22 @@ puts "crc = [CCSDSbinPacket::getCRC $binTmPack_1]"
 puts "crc = [CCSDSbinPacket::getCRC $binTmPack_2]"
 puts "crc = [CCSDSbinPacket::getCRC $binTmPack_3]"
 puts "crc = [CCSDSbinPacket::getCRC $binTmPack_4]"
+
+###########
+# tests C #
+###########
+
+set binPacket [hex2bin "30313233343536373839"]
+set subBinPacket1 [CCSDSbinPacket::subPacket $binPacket 0]
+set subBinPacket2 [CCSDSbinPacket::subPacket $binPacket 5]
+set subBinPacket3 [CCSDSbinPacket::subPacket $binPacket 5 4]
+set subBinPacket4 [CCSDSbinPacket::subPacket $binPacket 5 5]
+set subBinPacket5 [CCSDSbinPacket::subPacket $binPacket 5 6]
+set subBinPacket6 [CCSDSbinPacket::subPacket $binPacket 5 7]
+puts "binPacket = [CCSDSbinPacket::dumpStr $binPacket]"
+puts "subBinPacket1 = [CCSDSbinPacket::dumpStr $subBinPacket1]"
+puts "subBinPacket2 = [CCSDSbinPacket::dumpStr $subBinPacket2]"
+puts "subBinPacket3 = [CCSDSbinPacket::dumpStr $subBinPacket3]"
+puts "subBinPacket4 = [CCSDSbinPacket::dumpStr $subBinPacket4]"
+puts "subBinPacket5 = [CCSDSbinPacket::dumpStr $subBinPacket5]"
+puts "subBinPacket6 = [CCSDSbinPacket::dumpStr $subBinPacket6]"
