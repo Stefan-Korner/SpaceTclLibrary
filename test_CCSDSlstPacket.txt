@@ -68,8 +68,20 @@ crc = 37657
 crc = 37657
 crc = 0
 crc = 37657
+isPusTmPacket = true
+isPusTmPacket = true
+isPusTmPacket = true
+isPusTmPacket = true
+isPusTmPacket = true
+isPusTcPacket = false
+isPusTcPacket = false
+isPusTcPacket = false
+isPusTcPacket = false
+isPusTcPacket = false
 lstPacket = 
 0000 30 31 32 33 34 35 36 37 38 39                   0123456789
+isPusTmPacket = false
+isPusTcPacket = false
 subLstPacket1 = 
 0000 30 31 32 33 34 35 36 37 38 39                   0123456789
 subLstPacket2 = 

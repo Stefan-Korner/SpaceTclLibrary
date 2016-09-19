@@ -106,6 +106,16 @@ puts "crc = [CCSDShexPacket::getCRC $hexTmPack_1]"
 puts "crc = [CCSDShexPacket::getCRC $hexTmPack_2]"
 puts "crc = [CCSDShexPacket::getCRC $hexTmPack_3]"
 puts "crc = [CCSDShexPacket::getCRC $hexTmPack_4]"
+puts "isPusTmPacket = [CCSDShexPacket::isPusTmPacket $hexTmPack_0]"
+puts "isPusTmPacket = [CCSDShexPacket::isPusTmPacket $hexTmPack_1]"
+puts "isPusTmPacket = [CCSDShexPacket::isPusTmPacket $hexTmPack_2]"
+puts "isPusTmPacket = [CCSDShexPacket::isPusTmPacket $hexTmPack_3]"
+puts "isPusTmPacket = [CCSDShexPacket::isPusTmPacket $hexTmPack_4]"
+puts "isPusTcPacket = [CCSDShexPacket::isPusTcPacket $hexTmPack_0]"
+puts "isPusTcPacket = [CCSDShexPacket::isPusTcPacket $hexTmPack_1]"
+puts "isPusTcPacket = [CCSDShexPacket::isPusTcPacket $hexTmPack_2]"
+puts "isPusTcPacket = [CCSDShexPacket::isPusTcPacket $hexTmPack_3]"
+puts "isPusTcPacket = [CCSDShexPacket::isPusTcPacket $hexTmPack_4]"
 
 ###########
 # tests C #
@@ -119,6 +129,8 @@ set subHexPacket4 [CCSDShexPacket::subPacket $hexPacket 5 5]
 set subHexPacket5 [CCSDShexPacket::subPacket $hexPacket 5 6]
 set subHexPacket6 [CCSDShexPacket::subPacket $hexPacket 5 7]
 puts "hexPacket = [CCSDShexPacket::dumpStr $hexPacket]"
+puts "isPusTmPacket = [CCSDShexPacket::isPusTmPacket $hexPacket]"
+puts "isPusTcPacket = [CCSDShexPacket::isPusTcPacket $hexPacket]"
 puts "subHexPacket1 = [CCSDShexPacket::dumpStr $subHexPacket1]"
 puts "subHexPacket2 = [CCSDShexPacket::dumpStr $subHexPacket2]"
 puts "subHexPacket3 = [CCSDShexPacket::dumpStr $subHexPacket3]"

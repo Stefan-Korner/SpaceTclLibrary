@@ -302,6 +302,53 @@ proc CCSDShexPacket::calcCRC {hexPacket} {
 # packet processing #
 #####################
 
+# for checking binary data
+proc CCSDShexPacket::isPusTcPacket {hexPacket} {
+  set byteLength [CCSDShexPacket::byteLength $hexPacket]
+  if {$byteLength < 9} {
+    return false
+  }
+  set hdr00 [CCSDShexPacket::getUInt8 $hexPacket 0]
+  if {($hdr00 & 0xF8) != 0x18} {
+    return false
+  }
+  # check according to the ECSS-70-41A standard
+  # and not according to the old PSS-07-101 PUS standard
+  set hdr06 [CCSDShexPacket::getUInt8 $hexPacket 6]
+  if {($hdr06 & 0xF0) != 0x10} {
+    return false
+  }
+  # check the packet length field against the binary size
+  set packetLength [CCSDShexPacket::getPacketLength $hexPacket]
+  if {($packetLength + 7) != $byteLength} {
+    return false
+  }
+  return true
+}
+
+proc CCSDShexPacket::isPusTmPacket {hexPacket} {
+  set byteLength [CCSDShexPacket::byteLength $hexPacket]
+  if {$byteLength < 9} {
+    return false
+  }
+  set hdr00 [CCSDShexPacket::getUInt8 $hexPacket 0]
+  if {($hdr00 & 0xF8) != 0x08} {
+    return false
+  }
+  # check according to the ECSS-70-41A standard
+  # and not according to the old PSS-07-101 PUS standard
+  set hdr06 [CCSDShexPacket::getUInt8 $hexPacket 6]
+  if {($hdr06 & 0xF0) != 0x10} {
+    return false
+  }
+  # check the packet length field against the binary size
+  set packetLength [CCSDShexPacket::getPacketLength $hexPacket]
+  if {($packetLength + 7) != $byteLength} {
+    return false
+  }
+  return true
+}
+
 # efficient creation of a packet
 proc CCSDShexPacket::createTmPkt {apid pusType pusSubType hexData \
   {calcTime true} \
@@ -328,6 +375,8 @@ proc CCSDShexPacket::createTmPkt {apid pusType pusSubType hexData \
   set hdr0405 $packetLengthValue
   set hdrx0405 [format %04x $hdr0405]
   # PUS version
+  # create according to the ECSS-70-41A standard
+  # and not according to the old PSS-07-101 PUS standard
   set hdr06 0x10
   set hdrx06 [format %02x $hdr06]
   # PUS type

@@ -106,6 +106,16 @@ puts "crc = [CCSDSbinPacket::getCRC $binTmPack_1]"
 puts "crc = [CCSDSbinPacket::getCRC $binTmPack_2]"
 puts "crc = [CCSDSbinPacket::getCRC $binTmPack_3]"
 puts "crc = [CCSDSbinPacket::getCRC $binTmPack_4]"
+puts "isPusTmPacket = [CCSDSbinPacket::isPusTmPacket $binTmPack_0]"
+puts "isPusTmPacket = [CCSDSbinPacket::isPusTmPacket $binTmPack_1]"
+puts "isPusTmPacket = [CCSDSbinPacket::isPusTmPacket $binTmPack_2]"
+puts "isPusTmPacket = [CCSDSbinPacket::isPusTmPacket $binTmPack_3]"
+puts "isPusTmPacket = [CCSDSbinPacket::isPusTmPacket $binTmPack_4]"
+puts "isPusTcPacket = [CCSDSbinPacket::isPusTcPacket $binTmPack_0]"
+puts "isPusTcPacket = [CCSDSbinPacket::isPusTcPacket $binTmPack_1]"
+puts "isPusTcPacket = [CCSDSbinPacket::isPusTcPacket $binTmPack_2]"
+puts "isPusTcPacket = [CCSDSbinPacket::isPusTcPacket $binTmPack_3]"
+puts "isPusTcPacket = [CCSDSbinPacket::isPusTcPacket $binTmPack_4]"
 
 ###########
 # tests C #
@@ -119,6 +129,8 @@ set subBinPacket4 [CCSDSbinPacket::subPacket $binPacket 5 5]
 set subBinPacket5 [CCSDSbinPacket::subPacket $binPacket 5 6]
 set subBinPacket6 [CCSDSbinPacket::subPacket $binPacket 5 7]
 puts "binPacket = [CCSDSbinPacket::dumpStr $binPacket]"
+puts "isPusTmPacket = [CCSDSbinPacket::isPusTmPacket $binPacket]"
+puts "isPusTcPacket = [CCSDSbinPacket::isPusTcPacket $binPacket]"
 puts "subBinPacket1 = [CCSDSbinPacket::dumpStr $subBinPacket1]"
 puts "subBinPacket2 = [CCSDSbinPacket::dumpStr $subBinPacket2]"
 puts "subBinPacket3 = [CCSDSbinPacket::dumpStr $subBinPacket3]"

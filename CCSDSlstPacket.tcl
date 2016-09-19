@@ -289,6 +289,53 @@ proc CCSDSlstPacket::calcCRC {lstPacket} {
 # packet processing #
 #####################
 
+# for checking binary data
+proc CCSDSlstPacket::isPusTcPacket {lstPacket} {
+  set byteLength [CCSDSlstPacket::byteLength $lstPacket]
+  if {$byteLength < 9} {
+    return false
+  }
+  set hdr00 [CCSDSlstPacket::getUInt8 $lstPacket 0]
+  if {($hdr00 & 0xF8) != 0x18} {
+    return false
+  }
+  # check according to the ECSS-70-41A standard
+  # and not according to the old PSS-07-101 PUS standard
+  set hdr06 [CCSDSlstPacket::getUInt8 $lstPacket 6]
+  if {($hdr06 & 0xF0) != 0x10} {
+    return false
+  }
+  # check the packet length field against the binary size
+  set packetLength [CCSDSlstPacket::getPacketLength $lstPacket]
+  if {($packetLength + 7) != $byteLength} {
+    return false
+  }
+  return true
+}
+
+proc CCSDSlstPacket::isPusTmPacket {lstPacket} {
+  set byteLength [CCSDSlstPacket::byteLength $lstPacket]
+  if {$byteLength < 9} {
+    return false
+  }
+  set hdr00 [CCSDSlstPacket::getUInt8 $lstPacket 0]
+  if {($hdr00 & 0xF8) != 0x08} {
+    return false
+  }
+  # check according to the ECSS-70-41A standard
+  # and not according to the old PSS-07-101 PUS standard
+  set hdr06 [CCSDSlstPacket::getUInt8 $lstPacket 6]
+  if {($hdr06 & 0xF0) != 0x10} {
+    return false
+  }
+  # check the packet length field against the binary size
+  set packetLength [CCSDSlstPacket::getPacketLength $lstPacket]
+  if {($packetLength + 7) != $byteLength} {
+    return false
+  }
+  return true
+}
+
 # efficient creation of a packet
 proc CCSDSlstPacket::createTmPkt {apid pusType pusSubType lstData \
   {calcTime true} \
@@ -318,6 +365,8 @@ proc CCSDSlstPacket::createTmPkt {apid pusType pusSubType lstData \
   set hdr04 [expr ($hdr0405 & 0xFF00) / 0x100]
   set hdr05 [expr  $hdr0405 & 0xFF]
   # PUS version
+  # create according to the ECSS-70-41A standard
+  # and not according to the old PSS-07-101 PUS standard
   set hdr06 16
   # PUS type
   set hdr07 $pusType

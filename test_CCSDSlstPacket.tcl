@@ -107,6 +107,16 @@ puts "crc = [CCSDSlstPacket::getCRC $lstTmPack_1]"
 puts "crc = [CCSDSlstPacket::getCRC $lstTmPack_2]"
 puts "crc = [CCSDSlstPacket::getCRC $lstTmPack_3]"
 puts "crc = [CCSDSlstPacket::getCRC $lstTmPack_4]"
+puts "isPusTmPacket = [CCSDSlstPacket::isPusTmPacket $lstTmPack_0]"
+puts "isPusTmPacket = [CCSDSlstPacket::isPusTmPacket $lstTmPack_1]"
+puts "isPusTmPacket = [CCSDSlstPacket::isPusTmPacket $lstTmPack_2]"
+puts "isPusTmPacket = [CCSDSlstPacket::isPusTmPacket $lstTmPack_3]"
+puts "isPusTmPacket = [CCSDSlstPacket::isPusTmPacket $lstTmPack_4]"
+puts "isPusTcPacket = [CCSDSlstPacket::isPusTcPacket $lstTmPack_0]"
+puts "isPusTcPacket = [CCSDSlstPacket::isPusTcPacket $lstTmPack_1]"
+puts "isPusTcPacket = [CCSDSlstPacket::isPusTcPacket $lstTmPack_2]"
+puts "isPusTcPacket = [CCSDSlstPacket::isPusTcPacket $lstTmPack_3]"
+puts "isPusTcPacket = [CCSDSlstPacket::isPusTcPacket $lstTmPack_4]"
 
 ###########
 # tests C #
@@ -120,6 +130,8 @@ set subLstPacket4 [CCSDSlstPacket::subPacket $lstPacket 5 5]
 set subLstPacket5 [CCSDSlstPacket::subPacket $lstPacket 5 6]
 set subLstPacket6 [CCSDSlstPacket::subPacket $lstPacket 5 7]
 puts "lstPacket = [CCSDSlstPacket::dumpStr $lstPacket]"
+puts "isPusTmPacket = [CCSDSlstPacket::isPusTmPacket $lstPacket]"
+puts "isPusTcPacket = [CCSDSlstPacket::isPusTcPacket $lstPacket]"
 puts "subLstPacket1 = [CCSDSlstPacket::dumpStr $subLstPacket1]"
 puts "subLstPacket2 = [CCSDSlstPacket::dumpStr $subLstPacket2]"
 puts "subLstPacket3 = [CCSDSlstPacket::dumpStr $subLstPacket3]"
